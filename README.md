@@ -1,2 +1,2 @@
 # getadrinkortwo
-testing teh API of thecocktaildb.com
+testing the API of thecocktaildb.com
