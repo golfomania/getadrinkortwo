@@ -1,0 +1,40 @@
+.card-title {
+  font-size: 3rem !important;
+  padding: 1rem 0rem;
+}
+
+input::placeholder {
+  color: #e65100;
+  padding-left: 1rem;
+}
+
+label {
+  font-size: 1.5rem !important;
+}
+
+i#maincard {
+  font-size: 5rem !important;
+}
+
+p#subtitle {
+  color: #e65100;
+  background-color: black;
+  display: inline;
+  padding: 0.6rem;
+  font-weight: bold;
+}
+
+#drinkTitle {
+  background-color: rgba(10, 10, 10, 0.5);
+}
+
+a {
+  margin: 0.3rem;
+}
+
+td {
+  padding: 5px !important;
+}
+th {
+  padding: 10px 5px !important;
+}
