@@ -12,7 +12,7 @@ searchBtn.addEventListener("click", checkClick);
 function checkKey(e) {
   if (e.which === 13 && textInput.value !== "") {
     alertText.textContent = "";
-    startSearch();
+    startSearch(textInput.value);
   } else {
     alertText.textContent = "-- Please enter a drink name! --";
   }
@@ -22,24 +22,17 @@ function checkKey(e) {
 function checkClick() {
   if (textInput.value !== "") {
     alertText.textContent = "";
-    startSearch();
+    startSearch(textInput.value);
   } else {
     alertText.textContent = "-- Please enter a drink name! --";
   }
 }
 
 /* function start search */
-function startSearch() {
-  let input = textInput.value;
+function startSearch(inTxt) {
+  let input = inTxt;
   textInput.value = "";
   input = input.replace(/\s/g, "_");
-  //prepare input string
-  /*input = input.toLowerCase().split("");
-  input.map(el => 
-   if(el === " ") 
-    );
-  input = input.join("");*/
-  console.log(input);
 
   //fetch data from API
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`)
@@ -54,7 +47,6 @@ function startSearch() {
 
 /* function display result */
 function displayResult(result) {
-  console.log("result");
   //clear result div
   resultDiv.innerHTML = "";
   //alert if no drink is found
@@ -335,10 +327,13 @@ function displayResult(result) {
     </div>
   </div>`;
 
-    htmlBuild += ` <p>We found the following similar drinks:</p>
-    
-   <a href="#">${result.drinks[0].strDrink}</a>`;
+    if (result.drinks.length > 1) {
+      htmlBuild += ` <p>We found the following similar drinks:</p>`;
 
+      for (let i = 1; i < result.drinks.length; i++) {
+        htmlBuild += `<a href="#" id="similarDrink" class="waves-effect waves-light btn disabled"><i class="material-icons  left">local_bar</i>${result.drinks[i].strDrink}</a>`;
+      }
+    }
     resultDiv.innerHTML = htmlBuild;
   }
 }
