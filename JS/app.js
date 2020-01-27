@@ -15,8 +15,9 @@ function checkKey(e) {
   if (e.which === 13 && textInput.value !== "") {
     alertText.textContent = "";
     startSearch(textInput.value);
-  } else {
-    alertText.textContent = "-- Please enter a drink name! --";
+  } else if (e.which === 13 && textInput.value === "") {
+    alertText.textContent =
+      "-- Please enter a drink name before you hit Enter! --";
   }
 }
 
@@ -325,18 +326,31 @@ function displayResult(result) {
     htmlBuild += `
         </tbody>
       </table>
-    <br>
-        <p>Instructions:</p>
-          <p>${result.drinks[0].strInstructions}</p>
-          <br>
-          <p>Anleitung:</p>
+    <br>`;
+    if (result.drinks[0].strInstructions !== null) {
+      htmlBuild += `<p>Instructions:</p>
+            <p>${result.drinks[0].strInstructions}</p>
+            <br>`;
+    }
+    if (result.drinks[0].strInstructionsDE !== null) {
+      htmlBuild += `<p>Anleitung:</p>
           <p>${result.drinks[0].strInstructionsDE}</p>
-          <br>
-          <a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strAlcoholic}</a>
-          <a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strGlass}</a>
-          <a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strCategory}</a>
-          <a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strIBA}</a>
-        </div>
+          <br>`;
+    }
+    if (result.drinks[0].strAlcoholic !== null) {
+      htmlBuild += `<a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strAlcoholic}</a>`;
+    }
+    if (result.drinks[0].strGlass !== null) {
+      htmlBuild += `<a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strGlass}</a>`;
+    }
+    if (result.drinks[0].strCategory !== null) {
+      htmlBuild += `<a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strCategory}</a>`;
+    }
+    if (result.drinks[0].strIBA !== null) {
+      htmlBuild += `<a class="waves-effect waves-light btn-small disabled">${result.drinks[0].strIBA}</a>`;
+    }
+
+    htmlBuild += `</div>
         
       </div>
     </div>
