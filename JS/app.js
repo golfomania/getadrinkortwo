@@ -3,10 +3,12 @@ const textInput = document.getElementById("textInput");
 const alertText = document.getElementById("alertText");
 const searchBtn = document.getElementById("searchBtn");
 const resultDiv = document.getElementById("result");
+const randomBtn = document.getElementById("randomBtn");
 
 //add event listeners
 textInput.addEventListener("keydown", checkKey);
 searchBtn.addEventListener("click", checkClick);
+randomBtn.addEventListener("click", randomClick);
 
 /* function checkKey */
 function checkKey(e) {
@@ -26,6 +28,19 @@ function checkClick() {
   } else {
     alertText.textContent = "-- Please enter a drink name! --";
   }
+}
+
+/* function randomClick */
+async function randomClick() {
+  textInput.value = "";
+
+  //fetch data from API
+  const fetching = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/random.php`
+  );
+  const data = await fetching.json();
+
+  return displayResult(data);
 }
 
 /* function start search */
@@ -331,9 +346,25 @@ function displayResult(result) {
       htmlBuild += ` <p>We found the following similar drinks:</p>`;
 
       for (let i = 1; i < result.drinks.length; i++) {
-        htmlBuild += `<a href="#" id="similarDrink" class="waves-effect waves-light btn disabled"><i class="material-icons  left">local_bar</i>${result.drinks[i].strDrink}</a>`;
+        htmlBuild += `<a href="#" id="similarDrink" class="waves-effect waves-light blue-grey lighten-4 blue-grey-text btn"><i class="material-icons  left">local_bar</i>${result.drinks[i].strDrink}</a>`;
       }
+
+      //post result
+      resultDiv.innerHTML = htmlBuild;
+
+      //add event listener
+      const similarBtn = document.querySelectorAll("#similarDrink");
+      similarBtn.forEach(e => e.addEventListener("click", similarDrink));
+    } else {
+      resultDiv.innerHTML = htmlBuild;
     }
-    resultDiv.innerHTML = htmlBuild;
+
+    /* function similarDrink */
+    function similarDrink(e) {
+      const getText = Array.from(e.target.childNodes);
+      const newDrink = getText[1].textContent;
+      alertText.textContent = "";
+      startSearch(newDrink);
+    }
   }
 }

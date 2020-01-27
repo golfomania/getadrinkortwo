@@ -32,7 +32,7 @@
                 What do you want to drink today?
               </p>
               <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s5 left">
                   <input
                     placeholder="enter drink name here"
                     name="birthday"
@@ -41,12 +41,9 @@
                     id="textInput"
                   />
                 </div>
-                <div class="col s7 push-s1 left">
-                  <p id="alertText"></p>
-                </div>
-                <div class="col s4 right">
+                <div class="col s3">
                   <button
-                    class="btn waves-effect waves-light blue-grey lighten-4 blue-grey-text right"
+                    class="btn waves-effect waves-light blue-grey lighten-4 blue-grey-text "
                     type="submit"
                     name="birthday"
                     id="searchBtn"
@@ -55,8 +52,21 @@
                     <i class="material-icons right">send</i>
                   </button>
                 </div>
+
+                <div class="col s4 right">
+                  <button
+                    class="btn waves-effect waves-light blue-grey lighten-4 blue-grey-text right"
+                    type="submit"
+                    name="random"
+                    id="randomBtn"
+                  >
+                    random drink
+                  </button>
+                </div>
+                <div class="col s12 push-s1 left">
+                  <p id="alertText"></p>
+                </div>
               </div>
-              <br />
               <div class="row" id="result"></div>
             </div>
           </div>

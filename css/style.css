@@ -38,3 +38,8 @@ td {
 th {
   padding: 10px 5px !important;
 }
+
+#searchBtn,
+#randomBtn {
+  margin-top: 22px;
+}
